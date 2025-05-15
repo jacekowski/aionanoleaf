@@ -74,7 +74,7 @@ class Nanoleaf:
         self._auth_token = auth_token
         self._port = port
         self._retries = 3
-		self._essentials = 0
+        self._essentials = 0
 
     @property
     def host(self) -> str:
@@ -285,32 +285,32 @@ class Nanoleaf:
         resp = await self._request("get", "")
         data: InfoData = await resp.json()
         self._model = data["model"]
-		
-		essentials = ["NL72K1","NL73K1","NL72K4"]
-		
-		if self._model not in essentials:
-			self._name = data["name"]
-			self._serial_no = data["serialNo"]
-			self._manufacturer = data["manufacturer"]
-			self._firmware_version = data["firmwareVersion"]
-			self._hardware_version = data.get("hardwareVersion")
-			self._is_on = data["state"]["on"]["value"]
-			self._brightness = data["state"]["brightness"]["value"]
-			self._brightness_max = data["state"]["brightness"]["max"]
-			self._brightness_min = data["state"]["brightness"]["min"]
-			self._hue = data["state"]["hue"]["value"]
-			self._hue_max = data["state"]["hue"]["max"]
-			self._hue_min = data["state"]["hue"]["min"]
-			self._saturation = data["state"]["sat"]["value"]
-			self._saturation_max = data["state"]["sat"]["max"]
-			self._saturation_min = data["state"]["sat"]["min"]
-			self._color_temperature = data["state"]["ct"]["value"]
-			self._color_temperature_max = data["state"]["ct"]["max"]
-			self._color_temperature_min = data["state"]["ct"]["min"]
-			self._color_mode = data["state"]["colorMode"]
-			self._effects_list = data["effects"]["effectsList"]
-			self._effect = data["effects"]["select"]
-			self._panels = {Panel(panel) for panel in data["panelLayout"]["layout"]["positionData"]}
+        
+        essentials = ["NL72K1","NL73K1","NL72K4"]
+        
+        if self._model not in essentials:
+            self._name = data["name"]
+            self._serial_no = data["serialNo"]
+            self._manufacturer = data["manufacturer"]
+            self._firmware_version = data["firmwareVersion"]
+            self._hardware_version = data.get("hardwareVersion")
+            self._is_on = data["state"]["on"]["value"]
+            self._brightness = data["state"]["brightness"]["value"]
+            self._brightness_max = data["state"]["brightness"]["max"]
+            self._brightness_min = data["state"]["brightness"]["min"]
+            self._hue = data["state"]["hue"]["value"]
+            self._hue_max = data["state"]["hue"]["max"]
+            self._hue_min = data["state"]["hue"]["min"]
+            self._saturation = data["state"]["sat"]["value"]
+            self._saturation_max = data["state"]["sat"]["max"]
+            self._saturation_min = data["state"]["sat"]["min"]
+            self._color_temperature = data["state"]["ct"]["value"]
+            self._color_temperature_max = data["state"]["ct"]["max"]
+            self._color_temperature_min = data["state"]["ct"]["min"]
+            self._color_mode = data["state"]["colorMode"]
+            self._effects_list = data["effects"]["effectsList"]
+            self._effect = data["effects"]["select"]
+            self._panels = {Panel(panel) for panel in data["panelLayout"]["layout"]["positionData"]}
         else:
             self._name = data["name"]
             self._serial_no = data["serialNo"]
@@ -416,34 +416,34 @@ class Nanoleaf:
         self, brightness: int, relative: bool = False, transition: int | None = None
     ) -> None:
         """Set absolute or relative brightness with or without transition."""
-		self._brightness = brightness
+        self._brightness = brightness
         await self._set_state("brightness", brightness, relative, transition)
 
     async def set_saturation(self, saturation: int, relative: bool = False) -> None:
         """Set absolute or relative saturation."""
-		self._saturation = saturation
+        self._saturation = saturation
         await self._set_state("sat", saturation, relative)
 
     async def set_hue(self, hue: int, relative: bool = False) -> None:
         """Set absolute or relative hue."""
-		self._hue = hue
+        self._hue = hue
         await self._set_state("hue", hue, relative)
 
     async def set_color_temperature(
         self, color_temperature: int, relative: bool = False
     ) -> None:
         """Set absolute or relative color temperature."""
-		self._color_temperature = color_temperature
+        self._color_temperature = color_temperature
         await self._set_state("ct", color_temperature, relative)
 
     async def turn_on(self) -> None:
         """Turn the Nanoleaf on."""
-		self._is_on = True
+        self._is_on = True
         await self._set_state("on", True)
 
     async def turn_off(self, transition: int | None = None) -> None:
         """Turn the Nanoleaf off with or without transition."""
-		self._is_on = False
+        self._is_on = False
         if transition is None:
             await self._set_state("on", False)
         else:
@@ -554,7 +554,7 @@ class Nanoleaf:
                 touch_stream_callback, local_ip, local_port
             )
             _LOGGER.debug("Listening for UDP touch events on socket port: %s", socket_port)
-		self._state_callback = state_callback
+        self._state_callback = state_callback
         await self._listen_for_server_sent_events(
             state_callback,
             layout_callback,
