@@ -286,7 +286,7 @@ class Nanoleaf:
         data: InfoData = await resp.json()
         self._model = data["model"]
         
-        essentials = ["NL72K1","NL73K1","NL72K4"]
+        essentials = ["NL72K1","NL73K1","NL72K4","NL73K3"]
         
         if self._model not in essentials:
             self._name = data["name"]
